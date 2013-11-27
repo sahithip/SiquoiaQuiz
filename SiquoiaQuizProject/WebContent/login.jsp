@@ -10,15 +10,24 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login - SiQuoia</title>
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/jquery-2.0.0.js"></script>
         <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
         <link rel="stylesheet" href="style.css"/>
         <script>
         try {  
             $(document).ready(function() {
-//                $("form").submit(function(){
-//                    alert("logging in");
-//                });
+                if($("#errormessage").text().length > 0){
+                    $(".errorbar").animate({height: "25px"});
+                }
+                else
+                    $(".errorbar").hide();
+                
+                $("#closebutton").click(function(){
+                    $(".errorbar").animate({bottom: 0}, "linear", function(){
+                        $(this).remove();
+                    });
+                });
+                
             });
         } catch (error) {
           console.error("Your javascript has an error: " + error);
@@ -26,27 +35,32 @@
         </script>
     </head>
     <body>
+        <div class="errorbar">
+            <div id="errormessage">${message}</div>
+            <div id="closebutton"><center>x</center></div>
+        </div>
         <div class="top">
             <div class="logos">
                 <h1>SiQuoia</h1>
             </div>
         </div>
         <div class="content">
+            <div class="menu"></div>
             <div id="formbody">
-                <h1>
-                    Log in/Sign up
-                </h1>
+                <h2>
+                    Log in
+                </h2>
                 <div id="formcontent">
                     <form action="SiquoiaFrontController" method="post">
                         <table>
                             <tr>
                                 <td>
-                                Username:<input name="userName" placeholder="username" type="text"/>
+                                Username:<input name="userName" placeholder="username" type="text" style="width:100%"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                Password:<input name="password" placeholder="password" type="password"/>
+                                Password:<input name="password" placeholder="password" type="password" style="width:100%"/>
                                 </td>
                             </tr>
                             <tr>
@@ -58,10 +72,9 @@
                     </form>
                 </div>
             </div>
-        </div>
-        
-        <div class="bot">
-            <p>SiQuoia © - 2013</p>
+            <div class="bot">
+                <p>SiQuoia © - 2013</p>
+            </div>
         </div>
     </body>
 </html>

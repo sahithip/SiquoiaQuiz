@@ -23,6 +23,8 @@ public class Player extends User{
         this.lastName = lastName;
     }
     
+    
+    
     public Player(String userName, String email, long userId, String userType, String firstName, String middleName, String lastName){
         super(userName, email, userId);
         this.firstName = firstName;

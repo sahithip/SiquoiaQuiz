@@ -18,7 +18,7 @@ public class DBConnection {
 		try 
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/siquoia", "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/siquoialocal", "root", "");
 		} 
 		catch (SQLException e) 
 		{
@@ -66,9 +66,17 @@ public class DBConnection {
 		}
 	}
 
-public static void main(String args[]){
+public static void main(String args[]) throws SQLException{
 	Connection con = new DBConnection().getConnection();
 	System.out.println("con---"+con);
+	Statement stmt = con.createStatement();
+	ResultSet rs = stmt.executeQuery("SELECT * FROM user");
+	while (rs.next()) {
+		String id = rs.getString("user_id");
+		String firstName = rs.getString("user_name");
+		String lastName = rs.getString("password");
+		System.out.println("ID: " + id + ", First Name: " + firstName
+				+ ", Last Name: " + lastName);
 }
-
+}
 }

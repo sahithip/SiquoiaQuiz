@@ -11,20 +11,12 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author PC
  */
-public class TargetCommand implements Command{
-    protected String target;
+public class AjaxCommand {
     
-    public TargetCommand(String target){
-        this.target = target;
-    }
-    
-    @Override
-    public String execute(HttpServletRequest request) throws CommandException {
-        if(request.getSession().getAttribute("loggedIn")== null)
-        {
+    public String execute(HttpServletRequest request, String data) throws CommandException{
+        if(request.getSession().getAttribute("loggedIn") == null){
             throw new CommandException("login.jsp", "Session Expired. Please log in again.", new CommandException());
         }
-    return target;
-  }
-    
+        return data;
+    }
 }

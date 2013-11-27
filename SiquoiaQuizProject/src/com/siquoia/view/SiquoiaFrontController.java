@@ -28,7 +28,9 @@ public class SiquoiaFrontController extends HttpServlet {
         Command command = CommandFactory.getInstance().findCommand(commandKey);
         String target = null;
         try {
+        	
             target = command.execute(req);
+            System.out.println("---test"+target);
         } catch (CommandException ce) {
             req.setAttribute("cause", ce.getCause());
             req.setAttribute("message", ce.getMessage());
@@ -36,6 +38,7 @@ public class SiquoiaFrontController extends HttpServlet {
             RequestDispatcher dispatcher = req.getRequestDispatcher(ce.getErrorTarget());
             dispatcher.forward(req, res);
         }
+
         req.getRequestDispatcher(target).forward(req, res);
     }
 }

@@ -6,7 +6,7 @@ package com.siquoia.command;
 
 import com.siquoia.exception.AuthenticationException;
 import com.siquoia.exception.CommandException;
-import com.siquoia.impl.LoginImpl;
+import com.siquoia.impl.UserImpl;
 import com.siquoia.model.User;
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,24 +16,27 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class LoginCommand extends TargetCommand{
     
-    private LoginImpl loginIMPL;
+    private UserImpl loginIMPL = UserImpl.getInstance();
 
     public LoginCommand(String target) {
         super(target);
-        loginIMPL = new LoginImpl();
+        loginIMPL = new UserImpl();
     }
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
+        
+        if(request.getSession().getAttribute("loggedIn") != null)
+            request.getSession().removeAttribute("loggedIn");
         User user;
         try{
            user = loginIMPL.login(userName, password);
         }
         catch(AuthenticationException ae){
             request.getSession().removeAttribute("loggedIn");
-            throw new CommandException("Login Command", ae.getMessage(), ae);
+            throw new CommandException("login.jsp", ae.getMessage(), ae);
         }
         
         request.getSession().setAttribute("loggedIn", user);

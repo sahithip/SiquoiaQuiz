@@ -7,6 +7,7 @@ package com.siquoia.control;
 import com.siquoia.dbconnection.DBConnection;
 import com.siquoia.exception.AuthenticationException;
 import com.siquoia.exception.NotFoundException;
+import com.siquoia.exception.NotPersistedException;
 import com.siquoia.mapper.LeaderboardMapper;
 import com.siquoia.mapper.QuizMapper;
 import com.siquoia.mapper.UserMapper;
@@ -42,7 +43,7 @@ public class DBManager {
     public User getUser(String userName, String password) throws AuthenticationException{
         User user;
         try{
-            user = uMapper.getUser(userName, password);
+            user = uMapper.getUser(userName, conn);
         }catch(NotFoundException nfe){
             throw new AuthenticationException("User not authenticated");
         }
@@ -50,11 +51,12 @@ public class DBManager {
         return user;
     }
     
-    public User getUser(String userName){
-        User user;
-        user = uMapper.getUser(userName, conn);
-        
-        return user;
+    public User getUser(long id) throws NotFoundException{
+        return uMapper.getUser(id, conn);
+    }
+    
+    public User saveUser(long id, String userName, String email, String firstName, String middleName, String lastName) throws AuthenticationException, NotPersistedException{
+        return uMapper.saveUser(id, userName, email, firstName, middleName, lastName, conn);
     }
     
     public void closeConnection(){

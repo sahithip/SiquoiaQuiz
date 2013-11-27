@@ -8,11 +8,11 @@ package com.siquoia.exception;
  *
  * @author PC
  */
-public class NotFoundException extends Exception{
-
+public class NotPersistedException extends Exception{
+    
     private long id;
 
-    public NotFoundException(long id, String string) {
+    public NotPersistedException(long id, String string) {
         super(string);
         this.id = id;
     }
