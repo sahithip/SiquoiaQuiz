@@ -43,8 +43,10 @@
             <div class="pagecontent">
                 <h2>Welcome ${loggedIn.firstName}!</h2>
                 <a href="SiquoiaFrontController?command=logout">logout</a>
+                <a href="SiquoiaFrontController?command=selectCategoryList">Add Question</a>
+            	<a href="SiquoiaFrontController?command=selectUnverifiedQue">Verify Question</a>
+            	<a href="SiquoiaFrontController?command=viewSubmitedResult">View Submitted Result</a>
             </div>
-            
             <div class="bot">
                 <p>SiQuoia © - 2013</p>
             </div>
