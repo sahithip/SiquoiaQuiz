@@ -4,6 +4,13 @@ SiquoiaQuiz
 SiquoiaQuiz
 
 
+ALTER TABLE `siquoia`.`question` ADD COLUMN `que_verified` VARCHAR(45) NOT NULL  AFTER `correct_option` ;
+
+
+ALTER TABLE `siquoia`.`question` CHANGE COLUMN `question_id` `question_id` BIGINT(20) NOT NULL AUTO_INCREMENT  ;
+
+
+
 New Files::::::::::::::::::::::::::::
 
 
