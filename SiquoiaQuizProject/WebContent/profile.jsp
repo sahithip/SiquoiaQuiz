@@ -53,7 +53,7 @@
                         </tr>
                         <tr>
                             <td>Email:</td>
-                            <td><input class="profilefield" id="emailfield" type="textfield" value="${user.email}"/></td>
+                            <td><input class="profilefield" id="emailfield" type="email" value="${user.email}"/></td>
                         </tr>
                         <tr>
                             <td></td>

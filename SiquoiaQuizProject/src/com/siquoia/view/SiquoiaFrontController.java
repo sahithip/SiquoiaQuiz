@@ -56,7 +56,6 @@ public class SiquoiaFrontController extends HttpServlet {
 
             try{
                 out.println(command.execute(req, ""));
-                System.out.println(command.execute(req, ""));
             } catch (CommandException ex) {
                 req.getSession().removeAttribute("loggedIn");
                 req.setAttribute("cause", ex.getCause());
@@ -66,7 +65,6 @@ public class SiquoiaFrontController extends HttpServlet {
                 dispatcher.forward(req, res);
             }catch(NullPointerException npe){
                 req.setAttribute("message", "Couldn't execute command");
-                out.println("blah");
             }finally{
                 out.close();
             }

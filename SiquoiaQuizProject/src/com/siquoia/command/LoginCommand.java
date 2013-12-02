@@ -16,11 +16,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class LoginCommand extends TargetCommand{
     
-    private UserImpl loginIMPL = UserImpl.getInstance();
+    private UserImpl userIMPL = UserImpl.getInstance();
 
     public LoginCommand(String target) {
         super(target);
-        loginIMPL = new UserImpl();
     }
 
     @Override
@@ -32,7 +31,8 @@ public class LoginCommand extends TargetCommand{
             request.getSession().removeAttribute("loggedIn");
         User user;
         try{
-           user = loginIMPL.login(userName, password);
+        	System.out.println(userName);
+           user = userIMPL.login(userName, password);
         }
         catch(AuthenticationException ae){
             request.getSession().removeAttribute("loggedIn");

@@ -28,6 +28,7 @@ public class UserMapper {
         PreparedStatement ps;
         ResultSet rs;
         try {
+        	System.out.println("conn---"+conn);
             ps = conn.prepareStatement(SQL);
             ps.setString(1, userName);
             rs = ps.executeQuery();
