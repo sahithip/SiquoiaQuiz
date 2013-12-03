@@ -83,6 +83,23 @@ $(document).ready(function(){
                     });
                 });
                 
+                $("#signupbutton").click(function(){
+                	var userName = $("#userName").val();
+                	var email = $("#email").val();
+                	var password = $("#password").val();
+                	var firstName = $("#firstName").val();
+                	var middleName = $("#middleName").val();
+                	var lastName = $("#lastName").val();
+                	window.location.href = "SiquoiaFrontController?command=createuser"+
+                	"&userName="+userName+
+                	"&email="+email+
+                	"&password="+password+
+                	"&firstName="+firstName+
+                	"&middleName="+middleName+
+                	"&lastName="+lastName;
+                	alert(userName);
+                });
+                
                 function profileReady(data) {
                     $("#usernamefield").text(data.userName);
                     $("#emailfield").text(data.email);

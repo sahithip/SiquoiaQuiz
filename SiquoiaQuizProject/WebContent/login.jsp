@@ -64,10 +64,14 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2">
+                                <td>
                                     <button type="submit" name="command" value="login">Log in</button>
                                 <td>
+                                <td>
+                                    Don't have an account? <a href="SiquoiaFrontController?command=signup">Sign up</a>
+                                <td>
                             </tr>
+                            
                         </table>
                     </form>
                 </div>

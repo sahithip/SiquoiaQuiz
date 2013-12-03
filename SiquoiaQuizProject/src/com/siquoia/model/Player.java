@@ -33,6 +33,14 @@ public class Player extends User{
         this.userType = userType;
     }
     
+    public Player(long userId, String userName, String password, String email, String userType, String firstName, String middleName, String lastName){
+    	super(userName, email, userId);
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.userType = userType;
+    }
+    
     public String getUserType(){
         return userType;
     }

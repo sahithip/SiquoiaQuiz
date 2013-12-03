@@ -8,6 +8,8 @@ import java.util.HashMap;
 
 import com.siquoia.command.AjaxCommand;
 import com.siquoia.command.Command;
+import com.siquoia.command.ConnectCommand;
+import com.siquoia.command.CreateUserCommand;
 import com.siquoia.command.DisplayCategoryCommand;
 import com.siquoia.command.LoginCommand;
 import com.siquoia.command.LogoutCommand;
@@ -38,7 +40,11 @@ public class CommandFactory {
     }
     
     private void setupCommands(){
+    	commands.put(null, new ConnectCommand("login.jsp"));
+    	commands.put("signup", new ConnectCommand("signup.jsp"));
+    	commands.put("createuser", new CreateUserCommand("home.jsp"));
         commands.put("index", new TargetCommand("login.jsp"));
+        commands.put("home", new TargetCommand("home.jsp"));
         commands.put("login", new LoginCommand("home.jsp"));
         commands.put("logout", new LogoutCommand("login.jsp"));
         commands.put("profile", new ProfileCommand("profile.jsp"));
@@ -57,6 +63,7 @@ public class CommandFactory {
         AjaxCommand command = ajaxcommands.get(name);
         if(command == null)
             throw new NullPointerException();
+        System.out.println(command);
         return command;
     }
     

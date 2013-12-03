@@ -36,25 +36,12 @@ public class SaveProfileAjaxCommand extends AjaxCommand{
         User user = null;
         Gson json = new Gson();
         try{
-            System.err.println("DOING IT");
             user = userImpl.saveProfile(userId, userName, email, firstName, middleName, lastName);
-            System.err.println("I DID IT");
         }catch(AuthenticationException ae){
             throw new CommandException("login.jsp", ae.getMessage(), ae);
         }catch(NotPersistedException npe){
             throw new CommandException("login.jsp", npe.getMessage(), npe);
         }
         return super.execute(request, json.toJson(user));
-    }
-    
-    private String createJSON(){
-//        String data = "{"
-//                +"\"userName:\""  +   "\""+userName+"\",\n"
-//                +"\"email:\""     +   "\""+email+"\",\n"
-//                +"\"firstName:\"" +   "\""+firstName+"\",\n"
-//                +"\"middleName:\""+   "\""+middleName+"\",\n"
-//                +"\"lastName:\""  +   "\""+lastName+"\",\n"
-//                +"}";
-        return null;
     }
 }

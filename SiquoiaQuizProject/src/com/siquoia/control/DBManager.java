@@ -6,12 +6,14 @@ package com.siquoia.control;
 
 import com.siquoia.dbconnection.DBConnection;
 import com.siquoia.exception.AuthenticationException;
+import com.siquoia.exception.ExistsException;
 import com.siquoia.exception.NotFoundException;
 import com.siquoia.exception.NotPersistedException;
 import com.siquoia.mapper.LeaderboardMapper;
 import com.siquoia.mapper.QuizMapper;
 import com.siquoia.mapper.UserMapper;
 import com.siquoia.model.User;
+
 import java.sql.Connection;
 
 /**
@@ -49,6 +51,10 @@ public class DBManager {
         }
         
         return user;
+    }
+    
+    public User saveUser(String userName, String password, String email, String firstName, String middleName, String lastName) throws NotPersistedException, ExistsException{
+        return uMapper.saveUser(userName, password, email, firstName, middleName, lastName, conn);
     }
     
     public User getUser(long id) throws NotFoundException{

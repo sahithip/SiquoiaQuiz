@@ -4,17 +4,20 @@
  */
 package com.siquoia.mapper;
 
-import com.siquoia.exception.AuthenticationException;
-import com.siquoia.exception.NotFoundException;
-import com.siquoia.exception.NotPersistedException;
-import com.siquoia.model.Player;
-import com.siquoia.model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.siquoia.exception.AuthenticationException;
+import com.siquoia.exception.ExistsException;
+import com.siquoia.exception.NotFoundException;
+import com.siquoia.exception.NotPersistedException;
+import com.siquoia.model.Player;
+import com.siquoia.model.User;
 
 /**
  *
@@ -66,6 +69,63 @@ public class UserMapper {
             }
         }
         return player;
+    }
+    
+    public User saveUser(String userName, String password, String email, String firstName, String middleName, String lastName, Connection conn) throws NotPersistedException, ExistsException{
+    	//1. Check if user already exists
+        String SQL1 = "select * from user where user_name = ?";
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try{
+            ps = conn.prepareStatement(SQL1);
+            ps.setString(1, userName);
+            rs = ps.executeQuery();
+            if(rs.next())
+                throw new ExistsException(rs.getInt(1), "User already exists: " + rs.getString(2)); //User already exists, give error
+        }catch(SQLException ex){
+            try{
+                conn.rollback();
+            }catch(SQLException sqle){
+                throw new NotPersistedException(0L, "Could not connect");
+            }
+        }
+        
+        //2. Since user does not already exist, persist new one in database
+        String SQL2 = "insert into user values(NULL,'"+userName+"','"+password+"','"+email+"', 'free','"+firstName+"','"+middleName+"','"+lastName+"')";
+        
+        Statement stmt;
+        
+        try{
+        	stmt = conn.createStatement();
+        	stmt.execute(SQL2);
+        }catch(SQLException ex){
+        	try{
+        		conn.rollback();
+        		throw new NotPersistedException(0L, "Could not persist");
+        	}catch(SQLException sqle){}
+        }
+        
+        //3. Get the id of the inserted user
+        String SQL3 = "select LAST_INSERT_ID()";
+        ResultSet rs3;
+        PreparedStatement ps3;
+        long userId = 0L;
+        try{
+        	ps3 = conn.prepareStatement(SQL3);
+        	rs3 = ps3.executeQuery();
+        	if(rs3.next())
+        		userId = (long)rs3.getInt(1);
+        }catch(SQLException ex){
+        	try{
+        		conn.rollback();
+        	}catch(SQLException sqle){
+        		throw new ExistsException(0L, "User does not exist!");
+        	}
+        }
+        
+        
+        return new Player(userId, userName, password, email, "free", firstName, middleName, lastName);
     }
     
     public User saveUser(long id, String userName, String email, String firstName, String middleName, String lastName, Connection conn) throws AuthenticationException, NotPersistedException{

@@ -6,6 +6,7 @@ package com.siquoia.impl;
 
 import com.siquoia.control.DBManager;
 import com.siquoia.exception.AuthenticationException;
+import com.siquoia.exception.ExistsException;
 import com.siquoia.exception.NotFoundException;
 import com.siquoia.exception.NotPersistedException;
 import com.siquoia.model.User;
@@ -23,6 +24,10 @@ public class UserImpl {
         if(instance == null)
             instance = new UserImpl();
         return instance;
+    }
+    
+    public User signUp(String userName, String password, String email, String firstName, String middleName, String lastName) throws NotPersistedException, ExistsException{
+        return manager.saveUser(userName, password, email, firstName, middleName, lastName);
     }
     
     public User login(String userName, String password) throws AuthenticationException{

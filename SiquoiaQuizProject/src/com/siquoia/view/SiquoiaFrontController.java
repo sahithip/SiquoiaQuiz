@@ -52,6 +52,7 @@ public class SiquoiaFrontController extends HttpServlet {
     private void ajaxCall(HttpServletRequest req, HttpServletResponse res, String commandKey) throws ServletException, IOException{
             
             PrintWriter out = res.getWriter();
+            System.out.println(commandKey);
             AjaxCommand command = CommandFactory.getInstance().findAjaxCommand(commandKey);
 
             try{
