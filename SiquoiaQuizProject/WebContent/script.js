@@ -73,16 +73,6 @@ $(document).ready(function(){
                     }
                 });
                 
-                $("#nextquestionbutton").click(function(){
-                    $.ajax({
-                        url: "SiquoiaFrontController?command=NextQuestionAjaxCommand",
-                        cache: false,
-                        dataType: "json",
-                        success: questionReady,
-                        error: errorMessage("Couldn't load next question!")
-                    });
-                });
-                
                 $("#signupbutton").click(function(){
                 	var userName = $("#userName").val();
                 	var email = $("#email").val();

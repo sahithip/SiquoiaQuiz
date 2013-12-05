@@ -9,6 +9,7 @@ import com.siquoia.exception.AuthenticationException;
 import com.siquoia.exception.ExistsException;
 import com.siquoia.exception.NotFoundException;
 import com.siquoia.exception.NotPersistedException;
+import com.siquoia.exception.RollBackException;
 import com.siquoia.model.User;
 
 /**
@@ -27,7 +28,11 @@ public class UserImpl {
     }
     
     public User signUp(String userName, String password, String email, String firstName, String middleName, String lastName) throws NotPersistedException, ExistsException{
-        return manager.saveUser(userName, password, email, firstName, middleName, lastName);
+        try{
+        	return manager.saveUser(userName, password, email, firstName, middleName, lastName);
+        }catch(RollBackException rbe){
+        	throw new NotPersistedException(0L, rbe.getMessage());
+        }
     }
     
     public User login(String userName, String password) throws AuthenticationException{
@@ -45,6 +50,10 @@ public class UserImpl {
     }
     
     public User saveProfile(long id, String userName, String email, String firstName, String middleName, String lastName) throws AuthenticationException, NotPersistedException{
-        return manager.saveUser(id, userName, email, firstName, middleName, lastName);
+        try{
+        	return manager.saveUser(id, userName, email, firstName, middleName, lastName);
+        }catch(RollBackException rbe){
+        	throw new NotPersistedException(id, "Failed to persist and rollback!");
+        }
     }
 }

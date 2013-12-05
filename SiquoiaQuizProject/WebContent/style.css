@@ -36,6 +36,17 @@ body{
     display: inline;
 }
 
+.resulttable{
+	border: solid black thin;
+	border-collapse: collapse;
+	-webkit-border-radius: 10px;
+}
+
+.resulttable td{
+	border: solid black thin;
+	border-collapse: collapse;
+}
+
 .logos{
     margin: 0 auto;
     -webkit-font-smoothing: antialiased;

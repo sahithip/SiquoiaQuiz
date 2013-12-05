@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author PC
  */
-public class AjaxCommand {
+public abstract class AjaxCommand {
     
     public String execute(HttpServletRequest request, String data) throws CommandException{
         if(request.getSession().getAttribute("loggedIn") == null){

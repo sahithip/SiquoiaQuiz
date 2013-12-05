@@ -12,9 +12,37 @@ import java.util.ArrayList;
  */
 public class Quiz extends QuizComponent{
     
+	private long quizId;
     private ArrayList<Question> questions;
+    private Category category;
+    private User user;
+    private int correctAnswers;
     
-    public Quiz(){
+    public Quiz(long quizId, Category category, User user, int correctAnswers){
+        this.quizId = quizId;
+        this.category = category;
+        this.user = user;
+        this.correctAnswers = correctAnswers;
         questions = new ArrayList<Question>();
     }
+    
+    public Category getCategory() {
+		return category;
+	}
+    
+    public int getCorrectAnswers() {
+		return correctAnswers;
+	}
+    
+    public ArrayList<Question> getQuestions() {
+		return questions;
+	}
+    
+    public long getQuizId() {
+		return quizId;
+	}
+    
+    public User getUser() {
+		return user;
+	}
 }

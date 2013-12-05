@@ -43,6 +43,7 @@
             <div class="pagecontent">
                 <h2>Welcome ${loggedIn.firstName}!</h2>
                 <a href="SiquoiaFrontController?command=logout">logout</a>
+                <a href="SiquoiaFrontController?command=result">show results</a>
             </div>
             
             <div class="bot">

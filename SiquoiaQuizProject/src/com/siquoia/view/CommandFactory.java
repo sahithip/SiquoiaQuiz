@@ -11,6 +11,7 @@ import com.siquoia.command.Command;
 import com.siquoia.command.ConnectCommand;
 import com.siquoia.command.CreateUserCommand;
 import com.siquoia.command.DisplayCategoryCommand;
+import com.siquoia.command.GetResultAjaxCommand;
 import com.siquoia.command.LoginCommand;
 import com.siquoia.command.LogoutCommand;
 import com.siquoia.command.ProfileCommand;
@@ -49,10 +50,12 @@ public class CommandFactory {
         commands.put("logout", new LogoutCommand("login.jsp"));
         commands.put("profile", new ProfileCommand("profile.jsp"));
         commands.put("displayCategory", new DisplayCategoryCommand("DisplayCategory.jsp"));
+        commands.put("result", new TargetCommand("result.jsp"));
     }
     
     private void setupAjaxCommands(){
         ajaxcommands.put("saveprofile", new SaveProfileAjaxCommand());
+        ajaxcommands.put("getresult", new GetResultAjaxCommand());
     }
     
     public Command findCommand(String name){
@@ -63,7 +66,6 @@ public class CommandFactory {
         AjaxCommand command = ajaxcommands.get(name);
         if(command == null)
             throw new NullPointerException();
-        System.out.println(command);
         return command;
     }
     

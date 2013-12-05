@@ -11,11 +11,26 @@ import java.util.ArrayList;
  * @author PC
  */
 public class Category extends QuizComponent{
-    private String name;
-    private ArrayList<QuizComponent> components;
     
-    public Category(){
-        components = new ArrayList<QuizComponent>();
-        
-    }
+	private long categoryId;
+	private String name;
+	private ArrayList<Category> subCategories;
+	
+	public Category(long categoryId, String name, ArrayList<Category> subCategories){
+		this.categoryId = categoryId;
+		this.name = name;
+		this.subCategories = subCategories;
+	}
+	
+	public ArrayList<Category> getSubCategories(){
+		return subCategories;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setSubCategories(ArrayList<Category> subCategories) {
+		this.subCategories = subCategories;
+	}
 }

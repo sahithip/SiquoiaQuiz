@@ -8,7 +8,7 @@ package com.siquoia.mapper;
  *
  * @author PC
  */
-public class LeaderboardMapper {
+public class LeaderboardMapper implements Mapper{
     
     //TODO: Implement get -and set methods for this class
 }
