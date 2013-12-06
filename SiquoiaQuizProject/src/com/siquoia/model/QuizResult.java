@@ -1,15 +1,15 @@
 package com.siquoia.model;
 
-import java.util.ArrayList;
-
 public class QuizResult{
 
 	private Achievement achievement;
 	private Quiz quiz;
+	private Category category;
 	
 	public QuizResult(Quiz quiz, Achievement achievement){
 		this.quiz = quiz;
 		this.achievement = achievement;
+		category = quiz.getCategory();
 	}
 	
 	public Quiz getQuiz() {
@@ -21,7 +21,7 @@ public class QuizResult{
 	}
 	
 	public Category getCategory() {
-		return quiz.getCategory();
+		return category;
 	}
 	
 }

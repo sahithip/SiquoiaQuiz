@@ -26,11 +26,12 @@
                     }});
        			
        			function scoreReady(data){
+     				$(".resulttable").find('th').html("Category: " + data.category.name);
        				for(var i in data){
-       					var result = data[i];
-       					$(".resulttable").append("<tr><td>"+result.question+"</td>"+
-       							"<td>"+result.answer+"</td>"+
-       							"<td>"+result.isCorrect+"</td></tr>");
+       					var current = data.quiz 	.questions[i];
+       					$(".resulttable").append("<tr><td>"+current.question+"</td><td>"
+       							+current.submittedOption+"</td><td>"
+       							+current.correct+"<td></tr>");
        				}
        			}
        		});
@@ -79,7 +80,7 @@
         <center>
             <h2>Result of Quiz</h2>
             <table class="resulttable">
-            	<th colspan="3">Score</th>
+            	<th colspan="3"></th>
             	<tr style="background: #c6ccf9;">
             		<td>Question</td>
             		<td>Submitted Answer</td>

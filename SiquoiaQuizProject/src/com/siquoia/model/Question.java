@@ -16,6 +16,7 @@ public class Question {
     private String option3;
     private String correctOption;
     private String submittedOption;
+    private boolean correct;
     
     /*Constructor for submitting a question*/
     public Question(String question, String option1, String option2,
@@ -24,6 +25,7 @@ public class Question {
         this.option2 = option2;
         this.option3 = option3;
         this.correctOption = correctOption;
+        this.correct = submittedOption.equalsIgnoreCase(correctOption);
     }
     
     /*Constructor for answering a question*/
@@ -34,6 +36,19 @@ public class Question {
         this.option3 = option3;
         this.correctOption = correctOption;
         this.submittedOption = submittedOption;
+        this.correct = submittedOption.equalsIgnoreCase(correctOption);
+    }
+    
+    public String getQuestion() {
+		return question;
+	}
+    
+    public String getSubmittedOption() {
+		return submittedOption;
+	}
+    
+    public boolean isCorrect(){
+    	return correct;
     }
     
     
