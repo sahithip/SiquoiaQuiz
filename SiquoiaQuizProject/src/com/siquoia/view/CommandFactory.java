@@ -7,15 +7,16 @@ package com.siquoia.view;
 import java.util.HashMap;
 
 import com.siquoia.command.AjaxCommand;
+import com.siquoia.command.CategoryCommand;
 import com.siquoia.command.Command;
 import com.siquoia.command.ConnectCommand;
 import com.siquoia.command.CreateUserCommand;
-import com.siquoia.command.DisplayCategoryCommand;
 import com.siquoia.command.GetResultAjaxCommand;
 import com.siquoia.command.LoginCommand;
 import com.siquoia.command.LogoutCommand;
 import com.siquoia.command.ProfileCommand;
 import com.siquoia.command.SaveProfileAjaxCommand;
+import com.siquoia.command.SubCategoryAjaxCommand;
 import com.siquoia.command.TargetCommand;
 
 /**
@@ -49,13 +50,14 @@ public class CommandFactory {
         commands.put("login", new LoginCommand("home.jsp"));
         commands.put("logout", new LogoutCommand("login.jsp"));
         commands.put("profile", new ProfileCommand("profile.jsp"));
-        commands.put("displayCategory", new DisplayCategoryCommand("DisplayCategory.jsp"));
+        commands.put("categories", new CategoryCommand("categories.jsp"));
         commands.put("result", new TargetCommand("result.jsp"));
     }
     
     private void setupAjaxCommands(){
         ajaxcommands.put("saveprofile", new SaveProfileAjaxCommand());
         ajaxcommands.put("getresult", new GetResultAjaxCommand());
+        ajaxcommands.put("subcategories", new SubCategoryAjaxCommand());
     }
     
     public Command findCommand(String name){

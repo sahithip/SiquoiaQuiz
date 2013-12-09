@@ -33,4 +33,8 @@ public class Category extends QuizComponent{
 	public void setSubCategories(ArrayList<Category> subCategories) {
 		this.subCategories = subCategories;
 	}
+	
+	public long getCategoryId(){
+		return categoryId;
+	}
 }

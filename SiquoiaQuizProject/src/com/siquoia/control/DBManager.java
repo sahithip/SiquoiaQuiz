@@ -58,6 +58,10 @@ public class DBManager {
         return user;
     }
     
+    public ArrayList<Category> getCategories() throws NotFoundException, RollBackException{
+    	return qMapper.getCategories(conn);
+    }
+    
     public QuizResult getResult(long quizId) throws NotFoundException, RollBackException{
     	return qMapper.getResult(quizId, conn);
     }

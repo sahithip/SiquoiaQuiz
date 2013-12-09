@@ -58,6 +58,35 @@ public class QuizMapper implements Mapper{
     	return new QuizResult(quiz, manager.getAchievement(user.getUserId()));
     }
     
+    public ArrayList<Category> getCategories(Connection conn) throws NotFoundException, RollBackException{
+    	String SQL1 = "select * from category";
+    	
+    	PreparedStatement ps;
+    	ResultSet rs;
+    	ArrayList<Category> categories = new ArrayList<Category>();
+    	
+    	try{
+    		ps = conn.prepareStatement(SQL1);
+    		rs = ps.executeQuery();
+    		
+    		while(rs.next()){
+    			if(rs.getInt(2) == 0)			//Parent ID = null, therefore we must look for subcategories for this category and add them
+    				categories.add(new Category(rs.getInt(1), rs.getString(3), DBManager.getInstance().getSubCategories(rs.getInt(1))));
+				else
+    				categories.add(new Category(rs.getInt(1), rs.getString(3), null));
+    		}
+    		
+    	}catch(SQLException ex){
+    		try{
+    			conn.rollback();
+    			throw new NotFoundException(0L, "Could not find categories");
+    		}catch(SQLException sqle){
+    			throw new RollBackException(this);
+    		}
+    	}
+    	return categories;
+    }
+    
     public Category getCategory(long categoryId, Connection conn) throws NotFoundException, RollBackException{
     	
     	String SQL1 = "select * from category where category_id = ?";

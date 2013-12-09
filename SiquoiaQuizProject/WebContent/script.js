@@ -32,7 +32,7 @@ $(document).ready(function(){
                     window.location.href = "SiquoiaFrontController?command=submitquestion";
                 });
                 $("#menubutton4").click(function(){
-                    window.location.href = "SiquoiaFrontController?command=browsequiz";
+                    window.location.href = "SiquoiaFrontController?command=categories";
                 });
                 $("#menubutton5").click(function(){
                     var id = $("#userId").val();
@@ -99,6 +99,29 @@ $(document).ready(function(){
                     $("#changepasswordbutton").css("background-color", "#5e8ee4", "text-shadow", "1px 1px 5px #4173c9");
                     successMessage("Saved!");
                 }
+                
+                $(".subcategorybutton").click(function(){
+                	window.location.href = "SiquoiaFrontController?command=selectquestion&categoryId="+$(this).attr("id");
+                });
+                
+                $(".categorybutton").click(function(){
+                	var id = $(this).attr("id");
+                	alert(id);
+                	$.ajax({url: 
+                            "SiquoiaFrontController?command=subcategories",
+                            cache: false,
+                            dataType: "json",
+                            success: subCategoriesReady(data, id),
+                            error: function(){
+                                alert("Couldn't fetch subcategories from " + this.attr("id"));
+                            }});
+                });
+                
+                function subCategoriesReady(data, parentId){
+                	$("#parentId").append("<tr><td class='subcategorybutton' id='"+data.categoryId+"'>"+data.name+"</td></tr>");
+                }
+                
+                
                 
                 function questionReady(data){
                     

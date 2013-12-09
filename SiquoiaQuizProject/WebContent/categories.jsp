@@ -9,13 +9,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home - SiQuoia</title>
+    	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <title>Categories - SiQuoia</title>
         <link rel="stylesheet" href="style.css"/>
         <script src="http://code.jquery.com/jquery-2.0.0.js"></script>
         <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
         <script src="script.js"></script>
+        
     </head>
     <body>
+    	<input id="categories" type="hidden" value="${categories}"/>
         <input id="userId" type="hidden" value="${loggedIn.userId}"/>
         <div class="top">
             <div class="logos">
@@ -41,8 +44,19 @@
                 </div>
             </div>
             <div class="pagecontent">
-                <h2>Welcome ${loggedIn.firstName}!</h2>
-                <a href="SiquoiaFrontController?command=logout">logout</a>
+                <h2>Category browser</h2>
+                <table class="categorytable">
+                	<c:forEach var="category" items="${categories}">
+	                	<c:choose>
+                		<c:when test="${empty category.subCategories}">
+                			<td class="subcategorybutton" id="${category.categoryId}"><c:out value="${category.name}"></c:out></td>
+	                	</c:when>
+	                	<c:otherwise>
+	                		<td class="categorybutton" id="${category.categoryId}" ><c:out value="${category.name}"></c:out></td>
+	                	</c:otherwise>
+	                	</c:choose>
+                	</c:forEach>
+                </table>
             </div>
             
             <div class="bot">
