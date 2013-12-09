@@ -49,10 +49,9 @@
                 	<c:forEach var="category" items="${categories}">
 	                	<c:choose>
                 		<c:when test="${empty category.subCategories}">
-                			<td class="subcategorybutton" id="${category.categoryId}"><c:out value="${category.name}"></c:out></td>
 	                	</c:when>
 	                	<c:otherwise>
-	                		<td class="categorybutton" id="${category.categoryId}" ><c:out value="${category.name}"></c:out></td>
+	                		<td class="categorybutton" id="${category.categoryId}"><c:out value="${category.name}"></c:out></td>
 	                	</c:otherwise>
 	                	</c:choose>
                 	</c:forEach>

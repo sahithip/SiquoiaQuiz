@@ -101,14 +101,14 @@ $(document).ready(function(){
                 }
                 
                 $(".subcategorybutton").click(function(){
+                	alert("HAHAHA");
                 	window.location.href = "SiquoiaFrontController?command=selectquestion&categoryId="+$(this).attr("id");
                 });
                 
                 $(".categorybutton").click(function(){
                 	var id = $(this).attr("id");
-                	alert(id);
                 	$.ajax({url: 
-                            "SiquoiaFrontController?command=subcategories",
+                            "SiquoiaFrontController?command=subcategories&parentId="+id,
                             cache: false,
                             dataType: "json",
                             success: function(data){
@@ -120,10 +120,12 @@ $(document).ready(function(){
                 });
                 
                 function subCategoriesReady(data, parentId){
-                	$("#parentId").append("<tr><td class='subcategorybutton' id='"+data.categoryId+"'>"+data.name+"</td></tr>");
+                	for(var i in data){
+                		$("#"+parentId).append("<tr><td class='subcategorybutton' id='"+data[i].categoryId+"'>"+data[i].name+"</td></tr>");
+                		alert(data[i].categoryId);
+                	}
+                	
                 }
-                
-                
                 
                 function questionReady(data){
                     

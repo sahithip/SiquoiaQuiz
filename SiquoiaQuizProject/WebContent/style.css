@@ -18,9 +18,23 @@ body{
     width: 45%;
 }
 
-.categorytable(
+.categorytable{
 	
-);
+}
+
+.categorybutton{
+	border-right: solid black thin;
+	background: #f4f4f4;
+	cursor: default;
+}
+
+.subcategorybutton{
+	border-top: solid black thin;
+	border-left: transparent;
+	border-right: transparent;
+	background: #f9f9f9;
+	padding-left: 10px;
+}
 
 .successbar{
     background-color: cornflowerblue;
