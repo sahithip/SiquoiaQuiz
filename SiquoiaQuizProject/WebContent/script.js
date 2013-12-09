@@ -111,9 +111,11 @@ $(document).ready(function(){
                             "SiquoiaFrontController?command=subcategories",
                             cache: false,
                             dataType: "json",
-                            success: subCategoriesReady(data, id),
+                            success: function(data){
+                            	subCategoriesReady(data, id);
+                            },
                             error: function(){
-                                alert("Couldn't fetch subcategories from " + this.attr("id"));
+                                alert("Couldn't fetch subcategories from " + id);
                             }});
                 });
                 

@@ -127,10 +127,10 @@ p{
 }
 
 h1{
-    font-family: helvetica, sans-serif;
-    font-size: 35px;
-    font-weight: 900;
-    text-shadow: 2px 0px 15px #aaaaaa;
+  padding:40px;
+  display:block;
+  text-indent:-9999px;
+  background:url(https://googledrive.com/host/0B6xQda8OoNgUdTIyMDZKWGN1OVU/siquoialogo.png) top center no-repeat;
 }
 
 h2{
